@@ -1,0 +1,8 @@
+hash: 167c6cf34d24f33e450f62ee9abda2bf0163328602c476cfe1e1038c26237316
+updated: 2018-04-18T11:24:53.403669966-04:00
+imports:
+- name: github.com/smartystreets/go-disruptor
+  version: 1d1ef7a0321ccbe402c145b20ec0ad7546ba8f0e
+- name: github.com/Workiva/go-datastructures
+  version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
+testImports: []

@@ -1,0 +1,5 @@
+package: github.com/kellabyte/go-benchmarks
+import:
+- package: github.com/smartystreets/go-disruptor
+- package: github.com/Workiva/go-datastructures
+  version: ~1.0.46
