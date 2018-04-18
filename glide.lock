@@ -1,5 +1,5 @@
-hash: fb0ebb4e32e953d035293d10d15bf4c272f0144ab6bb42fc4016e880cf73f8a6
-updated: 2018-04-18T11:35:37.108166685-04:00
+hash: 8f7a6c500cb05ecc15071fadc3d66319da197027eb191c63bfedc47096ad46b7
+updated: 2018-04-18T19:53:46.639960872-04:00
 imports:
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
@@ -43,4 +43,8 @@ imports:
   version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
+- name: golang.org/x/tools
+  version: 94b14834a20132093826ea5e2da5502a13908ad3
+  subpackages:
+  - benchmark/parse
 testImports: []

@@ -26,3 +26,6 @@ import:
 - package: github.com/rbastic/go-zaphod64
 - package: github.com/surge/cityhash
 - package: github.com/intel-go/cpuid
+- package: golang.org/x/tools
+  subpackages:
+  - benchmark/parse
