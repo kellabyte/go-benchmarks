@@ -29,5 +29,6 @@ $(glidepath)/glide:
 
 libs: $(glidepath)/glide
 	$(glidepath)/glide install
+	R CMD BATCH plotting/setup.r
 
 deps: libs
