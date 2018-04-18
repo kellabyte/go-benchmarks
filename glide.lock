@@ -1,8 +1,46 @@
-hash: 167c6cf34d24f33e450f62ee9abda2bf0163328602c476cfe1e1038c26237316
-updated: 2018-04-18T11:24:53.403669966-04:00
+hash: fb0ebb4e32e953d035293d10d15bf4c272f0144ab6bb42fc4016e880cf73f8a6
+updated: 2018-04-18T11:35:37.108166685-04:00
 imports:
+- name: github.com/cespare/xxhash
+  version: 5c37fe3735342a2e0d01c87a907579987c8936cc
+- name: github.com/dchest/siphash
+  version: 4ebf1de738443ea7f45f02dc394c4df1942a126d
+- name: github.com/dgryski/go-farm
+  version: 2de33835d10275975374b37b2dcfd22c9020a1f5
+- name: github.com/dgryski/go-highway
+  version: 6218551990942dee1a9689662919d4d4601b86ce
+- name: github.com/dgryski/go-marvin32
+  version: b9e766f9d148d0c81c33a69245467d14c11ab3f4
+- name: github.com/dgryski/go-metro
+  version: 280f6062b5bc97ee9b9afe7f2ccb361e59845baa
+- name: github.com/dgryski/go-sip13
+  version: 9cdcd33273afbf1d7d6da5620e103746294dabda
+- name: github.com/dgryski/go-spooky
+  version: ed3d087f40e29d80bfe4d9c1c1f2d4885eb1b82a
+- name: github.com/dgryski/go-stadtx
+  version: 3c3d9b328c24a9b5ecd370654cd6e9d60a85752d
+- name: github.com/dgryski/go-t1ha
+  version: d42c050643ba3f1f03c1563aaccd3b3035098560
+- name: github.com/dgryski/trifles
+  version: 1dd4f62b7e4291cc8cbc9fda4ae9381a7bfe1fad
+  subpackages:
+  - tsip/go
+- name: github.com/intel-go/cpuid
+  version: ec7157e9698925f3ed066c1eeecb7059e0c3422e
+- name: github.com/minio/blake2b-simd
+  version: 3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4
+- name: github.com/minio/highwayhash
+  version: 9c7e959d92fc8c6ee2cccdf74ae48685816768e2
+- name: github.com/OneOfOne/xxhash
+  version: 4e9e81466dc37c9fd94ce9ecf42020ef54112203
+- name: github.com/opennota/fasthash
+  version: b619b4c25b8109061ba3c7fec088f9cb289b548c
+- name: github.com/rbastic/go-zaphod64
+  version: 51824b1f1f4db0bdeb89c6a53ccdac361e1fc738
 - name: github.com/smartystreets/go-disruptor
   version: 1d1ef7a0321ccbe402c145b20ec0ad7546ba8f0e
+- name: github.com/surge/cityhash
+  version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
 testImports: []

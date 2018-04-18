@@ -3,3 +3,26 @@ import:
 - package: github.com/smartystreets/go-disruptor
 - package: github.com/Workiva/go-datastructures
   version: ~1.0.46
+- package: github.com/OneOfOne/xxhash
+  version: ~1.2.1
+- package: github.com/cespare/xxhash
+  version: ~1.0.0
+- package: github.com/dchest/siphash
+  version: ~1.1.0
+- package: github.com/dgryski/go-farm
+- package: github.com/dgryski/go-highway
+- package: github.com/dgryski/go-marvin32
+- package: github.com/dgryski/go-metro
+- package: github.com/dgryski/go-sip13
+- package: github.com/dgryski/go-spooky
+- package: github.com/dgryski/go-stadtx
+- package: github.com/dgryski/go-t1ha
+- package: github.com/dgryski/trifles
+  subpackages:
+  - tsip/go
+- package: github.com/minio/blake2b-simd
+- package: github.com/minio/highwayhash
+- package: github.com/opennota/fasthash
+- package: github.com/rbastic/go-zaphod64
+- package: github.com/surge/cityhash
+- package: github.com/intel-go/cpuid
