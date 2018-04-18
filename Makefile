@@ -1,6 +1,9 @@
 projectpath = ${PWD}
 glidepath = ${PWD}/vendor/github.com/Masterminds/glide
 
+hashing: deps
+	cd hashing;go test -benchmem -bench .
+
 target:
 	@go build
 

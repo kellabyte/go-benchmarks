@@ -11,7 +11,8 @@ Memory: 16GB
 
 # Results
 ```
-go test -benchmem -bench .
+make hashing
+
 goos: darwin
 goarch: amd64
 pkg: github.com/kellabyte/go-benchmarks/hashing
