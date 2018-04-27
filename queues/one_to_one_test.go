@@ -73,6 +73,7 @@ func BenchmarkSingleProducerSingleConsumerFastlane(b *testing.B) {
 		wg.Done()
 	}(b.N)
 
+	b.ResetTimer()
 	go func(n int) {
 		for i := 0; i < n; i++ {
 			ch.Send(uint64(i))
