@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	diodes "github.com/cloudfoundry/go-diodes"
+	diodes "code.cloudfoundry.org/go-diodes"
 )
 
 func BenchmarkSingleProducerSingleConsumerChannel(b *testing.B) {
