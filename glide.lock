@@ -1,5 +1,5 @@
-hash: 7b1e959c5e1dae7ec0b231c39acfb063e2a8cac3277a9d31af6595e3c915e4e3
-updated: 2018-04-27T13:53:18.817580912-04:00
+hash: 669c699cd2f6b8c4a9458d7303590c0cc1685f057146d10cc8c807665928400b
+updated: 2018-04-27T14:10:22.98721646-04:00
 imports:
 - name: code.cloudfoundry.org/go-diodes
   version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
@@ -53,6 +53,8 @@ imports:
   version: 751f59108ad87aaef43e243de036301d233baddb
   subpackages:
   - internal
+- name: github.com/tidwall/fastlane
+  version: 9c5d29d7558da1332f0ba157fd721bdbae9724c8
 - name: github.com/tidwall/spinlock
   version: 9caf128cdc6499297f5c15f06a50f6aa84e30a19
 - name: github.com/Workiva/go-datastructures

@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	diodes "code.cloudfoundry.org/go-diodes"
+	"github.com/tidwall/fastlane"
 )
 
 func BenchmarkSingleProducerSingleConsumerChannel(b *testing.B) {
@@ -53,6 +54,28 @@ func BenchmarkSingleProducerSingleConsumerDiode(b *testing.B) {
 	go func(n int) {
 		for i := 0; i < b.N; i++ {
 			d.Next()
+		}
+		wg.Done()
+	}(b.N)
+
+	wg.Wait()
+}
+
+func BenchmarkSingleProducerSingleConsumerFastlane(b *testing.B) {
+	var ch fastlane.ChanUint64
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func(n int) {
+		for i := 0; i < n; i++ {
+			ch.Recv()
+		}
+		wg.Done()
+	}(b.N)
+
+	go func(n int) {
+		for i := 0; i < n; i++ {
+			ch.Send(uint64(i))
 		}
 		wg.Done()
 	}(b.N)

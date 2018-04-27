@@ -5,10 +5,11 @@ This directory includes queue implementation benchmarks for various different co
 Different queue-like data structures sometimes make tradeoffs for performance so we can't treat all of these libraries as equals. What they do is give you a basic FIFO interface but what they guarantee in safety and ordering can differ. This section documents the guarantees each provide so you can decide what is best for you.
 
 ```
-Library             Data loss    Order preserving
---------------------------------------------------
-Channels            No           Yes
-Diodes              Yes          Yes
+Library             Data loss    Order preserving    Producers    Consumers
+--------------------------------------------------------------------------------
+Channels            No           Yes                 1+           1+
+Diodes              Yes          Yes                 1+           1+
+Fastlane            No           Yes                 1            1
 ```
 
 # Hardware
@@ -27,8 +28,9 @@ make queues
 goos: darwin
 goarch: amd64
 pkg: github.com/kellabyte/go-benchmarks/queues
-BenchmarkSingleProducerSingleConsumerChannel-8 	20000000	84.8 ns/op	   0 B/op   0 allocs/op
-BenchmarkSingleProducerSingleConsumerDiode-8   	20000000	87.6 ns/op	  15 B/op   0 allocs/op
+BenchmarkSingleProducerSingleConsumerChannel-8    	20000000	        85.1 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSingleProducerSingleConsumerDiode-8      	20000000	        85.9 ns/op	      15 B/op	       0 allocs/op
+BenchmarkSingleProducerSingleConsumerFastlane-8   	30000000	        64.0 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/kellabyte/go-benchmarks/queues	3.859s
+ok  	github.com/kellabyte/go-benchmarks/queues	5.823s
 ```
