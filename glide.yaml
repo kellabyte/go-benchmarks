@@ -31,3 +31,4 @@ import:
   - benchmark/parse
 - package: github.com/tidwall/evio
 - package: github.com/tidwall/spinlock
+- package: github.com/cloudfoundry/go-diodes

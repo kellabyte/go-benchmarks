@@ -1,8 +1,10 @@
-hash: e093d93f582c67d6cc04e26b60913c185a463e04f3259a1d0561bc0e5e7f5266
-updated: 2018-04-26T22:15:23.62420154-04:00
+hash: 9a9397d3c34b5d0736a5008162906a5b87e7e5da52e019235a8cd336484da52a
+updated: 2018-04-27T12:43:29.25635552-04:00
 imports:
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
+- name: github.com/cloudfoundry/go-diodes
+  version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
 - name: github.com/dchest/siphash
   version: 4ebf1de738443ea7f45f02dc394c4df1942a126d
 - name: github.com/dgryski/go-farm
@@ -44,7 +46,7 @@ imports:
 - name: github.com/surge/cityhash
   version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
 - name: github.com/tidwall/evio
-  version: cc7a209dcbe6fa42dcc5116377c983fc25f2252a
+  version: 751f59108ad87aaef43e243de036301d233baddb
   subpackages:
   - internal
 - name: github.com/tidwall/spinlock
