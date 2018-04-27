@@ -1,31 +1,25 @@
-.PHONY: hashing json
+.PHONY: hashing http json
 
 projectpath = ${PWD}
 glidepath = ${PWD}/vendor/github.com/Masterminds/glide
 
+gobench2csv:
+	go build -o build/gobench2csv cmd/gobench2csv/main.go
+ 
 hashing:
 	@cd hashing;go test -benchmem -bench . > hashing.results
 
 json: generate
 	@cd json;go test -benchmem -bench . > json.results
 
+http:
+	go build -o build/http/evio http/evio.go
+
 target:
 	@go build
 
 test:
 	@go test
-
-integration: test
-	@go test -tags=integration
-
-linux:
-	@env GOOS=linux GOARCH=amd64 go build -o benchmarks-linux-amd64
-
-mac:
-	@env GOOS=darwin GOARCH=amd64 go build -o benchmarks-mac-amd64
-
-windows:
-	@env GOOS=windows GOARCH=amd64 go build -o benchmarks-windows-amd64.exe
 
 $(glidepath)/glide:
 	@git clone https://github.com/Masterminds/glide.git $(glidepath)

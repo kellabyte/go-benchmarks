@@ -29,3 +29,5 @@ import:
 - package: golang.org/x/tools
   subpackages:
   - benchmark/parse
+- package: github.com/tidwall/evio
+- package: github.com/tidwall/spinlock

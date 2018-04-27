@@ -1,5 +1,5 @@
-hash: 8f7a6c500cb05ecc15071fadc3d66319da197027eb191c63bfedc47096ad46b7
-updated: 2018-04-18T19:53:46.639960872-04:00
+hash: e093d93f582c67d6cc04e26b60913c185a463e04f3259a1d0561bc0e5e7f5266
+updated: 2018-04-26T22:15:23.62420154-04:00
 imports:
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
@@ -27,6 +27,8 @@ imports:
   - tsip/go
 - name: github.com/intel-go/cpuid
   version: ec7157e9698925f3ed066c1eeecb7059e0c3422e
+- name: github.com/kavu/go_reuseport
+  version: 5f2ed2cad19279ccb56ddbd38220e6c9803dfe65
 - name: github.com/minio/blake2b-simd
   version: 3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4
 - name: github.com/minio/highwayhash
@@ -41,6 +43,12 @@ imports:
   version: 1d1ef7a0321ccbe402c145b20ec0ad7546ba8f0e
 - name: github.com/surge/cityhash
   version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
+- name: github.com/tidwall/evio
+  version: cc7a209dcbe6fa42dcc5116377c983fc25f2252a
+  subpackages:
+  - internal
+- name: github.com/tidwall/spinlock
+  version: 9caf128cdc6499297f5c15f06a50f6aa84e30a19
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
 - name: golang.org/x/tools
