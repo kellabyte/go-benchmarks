@@ -1,4 +1,4 @@
-.PHONY: hashing http json
+.PHONY: hashing http queues json
 
 projectpath = ${PWD}
 glidepath = ${PWD}/vendor/github.com/Masterminds/glide
@@ -12,6 +12,9 @@ hashing:
 
 json: generate
 	@cd json;go test -benchmem -bench . > json.results
+
+queues:
+	@cd queues;go test -benchmem -bench .
 
 http:
 	@go build -o build/http/evio http/evio.go

@@ -1,6 +1,8 @@
-hash: 360e6106be78578c08b9f9d04828eaff046770b001740cc4e284f74bcccee057
-updated: 2018-04-27T12:06:14.710558717+02:00
+hash: 669c699cd2f6b8c4a9458d7303590c0cc1685f057146d10cc8c807665928400b
+updated: 2018-04-27T14:10:22.98721646-04:00
 imports:
+- name: code.cloudfoundry.org/go-diodes
+  version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
 - name: github.com/dchest/siphash
@@ -41,6 +43,10 @@ imports:
   version: 9c7e959d92fc8c6ee2cccdf74ae48685816768e2
 - name: github.com/OneOfOne/xxhash
   version: 4e9e81466dc37c9fd94ce9ecf42020ef54112203
+- name: github.com/onsi/ginkgo
+  version: 9eda700730cba42af70d53180f9dcce9266bc2bc
+- name: github.com/onsi/gomega
+  version: 003f63b7f4cff3fc95357005358af2de0f5fe152
 - name: github.com/opennota/fasthash
   version: b619b4c25b8109061ba3c7fec088f9cb289b548c
 - name: github.com/rbastic/go-zaphod64
@@ -53,12 +59,24 @@ imports:
   version: 751f59108ad87aaef43e243de036301d233baddb
   subpackages:
   - internal
+- name: github.com/tidwall/fastlane
+  version: 9c5d29d7558da1332f0ba157fd721bdbae9724c8
 - name: github.com/tidwall/spinlock
   version: 9caf128cdc6499297f5c15f06a50f6aa84e30a19
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
+- name: golang.org/x/net
+  version: 1c05540f6879653db88113bc4a2b70aec4bd491f
+  subpackages:
+  - html/charset
+- name: golang.org/x/text
+  version: f21a4dfb5e38f5895301dc265a8def02365cc3d0
+  subpackages:
+  - encoding
 - name: golang.org/x/tools
   version: 94b14834a20132093826ea5e2da5502a13908ad3
   subpackages:
   - benchmark/parse
+- name: gopkg.in/yaml.v2
+  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
 testImports: []
