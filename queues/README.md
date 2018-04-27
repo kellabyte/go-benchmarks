@@ -7,10 +7,10 @@ Different queue-like data structures sometimes make tradeoffs for performance so
 ### Data loss
 Below is a description of data loss behaviours queues can experience that may be important for your use case to understand.
 
-**_D1_**. Producers outpace consumers and overwrite unread records.**  
+**_D1_**. Producers outpace consumers and overwrite unread records.  
 Often seen in ring buffer implementations if a producer hits the end of the buffer it loops back to the front and keeps writing. If the producer is outpacing the consumer it means the producer could eventually lap the consumer and overwrite records causing data loss.
 
-**_D2_**. Producers outpace consumers and consumers skip records to keep up.**  
+**_D2_**. Producers outpace consumers and consumers skip records to keep up.  
 If the consumer isn't keeping up with the producer some implementations may skip records to keep up.
 
 ```
