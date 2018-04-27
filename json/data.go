@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 )
 
-//go:generate easyjson -all data.go
+//go:generate ../easyjson -all data.go
 
 var largeStructText, _ = ioutil.ReadFile("example.json")
 var largeStructData LargeStruct

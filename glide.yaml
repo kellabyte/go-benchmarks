@@ -31,3 +31,8 @@ import:
   - benchmark/parse
 - package: github.com/tidwall/evio
 - package: github.com/tidwall/spinlock
+- package: github.com/mailru/easyjson
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter

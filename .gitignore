@@ -18,3 +18,4 @@ vendor
 *.results
 
 glide
+easyjson

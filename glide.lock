@@ -1,5 +1,5 @@
-hash: e093d93f582c67d6cc04e26b60913c185a463e04f3259a1d0561bc0e5e7f5266
-updated: 2018-04-26T22:15:23.62420154-04:00
+hash: 360e6106be78578c08b9f9d04828eaff046770b001740cc4e284f74bcccee057
+updated: 2018-04-27T12:06:14.710558717+02:00
 imports:
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
@@ -29,6 +29,12 @@ imports:
   version: ec7157e9698925f3ed066c1eeecb7059e0c3422e
 - name: github.com/kavu/go_reuseport
   version: 5f2ed2cad19279ccb56ddbd38220e6c9803dfe65
+- name: github.com/mailru/easyjson
+  version: 8b799c424f57fa123fc63a99d6383bc6e4c02578
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter
 - name: github.com/minio/blake2b-simd
   version: 3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4
 - name: github.com/minio/highwayhash
@@ -44,7 +50,7 @@ imports:
 - name: github.com/surge/cityhash
   version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
 - name: github.com/tidwall/evio
-  version: cc7a209dcbe6fa42dcc5116377c983fc25f2252a
+  version: 751f59108ad87aaef43e243de036301d233baddb
   subpackages:
   - internal
 - name: github.com/tidwall/spinlock
