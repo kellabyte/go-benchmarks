@@ -5,3 +5,8 @@ This repository includes various Go benchmarks of data structures and services s
 ```
 make hashing
 ```
+- [Queue data structures](https://github.com/kellabyte/go-benchmarks/tree/master/queues)
+```
+make queues
+```
+
