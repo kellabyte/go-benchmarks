@@ -1,4 +1,15 @@
+# Introduction
 This directory includes queue implementation benchmarks for various different configurations of producer and consumer counts. Each data structure may have different safety and ordering guarantees. This document should include results along with safety and ordering information to inform the viewers of the tradeoffs.
+
+# Guarantees
+Different queue-like data structures sometimes make tradeoffs for performance so we can't treat all of these libraries as equals. What they do is give you a basic FIFO interface but what they guarantee in safety and ordering can differ. This section documents the guarantees each provide so you can decide what is best for you.
+
+```
+Library             Data loss    Order preserving
+--------------------------------------------------
+Channels            No           Yes
+Diodes              Yes          Yes
+```
 
 # Hardware
 ```
