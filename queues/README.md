@@ -16,8 +16,8 @@ make queues
 goos: darwin
 goarch: amd64
 pkg: github.com/kellabyte/go-benchmarks/queues
-BenchmarkSingleProducerSingleConsumerChannel-8   	20000000	    84.8 ns/op	   0 B/op	   0 allocs/op
-BenchmarkSingleProducerSingleConsumerDiode-8     	20000000	    87.6 ns/op	  15 B/op	   0 allocs/op
+BenchmarkSingleProducerSingleConsumerChannel-8   	20000000	84.8 ns/op	   0 B/op   0 allocs/op
+BenchmarkSingleProducerSingleConsumerDiode-8     	20000000	87.6 ns/op	  15 B/op   0 allocs/op
 PASS
 ok  	github.com/kellabyte/go-benchmarks/queues	3.859s
 ```
