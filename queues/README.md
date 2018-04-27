@@ -4,12 +4,21 @@ This directory includes queue implementation benchmarks for various different co
 # Guarantees
 Different queue-like data structures sometimes make tradeoffs for performance so we can't treat all of these libraries as equals. What they do is give you a basic FIFO interface but what they guarantee in safety and ordering can differ. This section documents the guarantees each provide so you can decide what is best for you.
 
+#### Data loss
+Below is a description of data loss behaviours queues can experience that may be important for your use case to understand.
+
+##### D1. Producers outpace consumers and overwrite unread records.
+Often seen in ring buffer implementations if a producer hits the end of the buffer it loops back to the front and keeps writing. If the producer is outpacing the consumer it means the producer could eventually lap the consumer and overwrite records causing data loss.
+
+##### D2. Producers outpace consumers and consumers skip records to keep up.
+If the consumer isn't keeping up with the producer some implementations may skip records to keep up.
+
 ```
-Library             Data loss    Order preserving    Producers    Consumers
+Library             Order preserving    Data loss   Producers    Consumers
 --------------------------------------------------------------------------------
-Channels            No           Yes                 1+           1+
-Diodes              Yes          Yes                 1+           1+
-Fastlane            No           Yes                 1            1
+Channels            Yes                  No         1+           1+
+Diodes              Yes                  D1         1+           1+
+Fastlane            Yes                  No         1            1
 ```
 
 # Hardware
