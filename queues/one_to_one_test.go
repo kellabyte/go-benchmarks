@@ -9,7 +9,7 @@ import (
 	"github.com/tidwall/fastlane"
 )
 
-func BenchmarkSingleProducerSingleConsumerChannel(b *testing.B) {
+func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 	q := make(chan int64, 8192)
 
 	var wg sync.WaitGroup
@@ -35,7 +35,7 @@ func BenchmarkSingleProducerSingleConsumerChannel(b *testing.B) {
 	wg.Wait()
 }
 
-func BenchmarkSingleProducerSingleConsumerDiode(b *testing.B) {
+func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 	d := diodes.NewPoller(diodes.NewOneToOne(b.N, diodes.AlertFunc(func(missed int) {
 		panic("Oops...")
 	})))
@@ -61,7 +61,7 @@ func BenchmarkSingleProducerSingleConsumerDiode(b *testing.B) {
 	wg.Wait()
 }
 
-func BenchmarkSingleProducerSingleConsumerFastlane(b *testing.B) {
+func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 	var ch fastlane.ChanUint64
 	var wg sync.WaitGroup
 	wg.Add(2)
