@@ -43,3 +43,5 @@ Benchmark1Producer1ConsumerFastlane-8   20000000        66.7 ns/op       0 B/op	
 PASS
 ok  	github.com/kellabyte/go-benchmarks/queues	5.235s
 ```
+
+![latency distribution](https://i.imgur.com/xTz9vEC.png)
