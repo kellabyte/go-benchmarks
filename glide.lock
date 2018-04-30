@@ -62,7 +62,7 @@ imports:
 - name: github.com/tidwall/spinlock
   version: 9caf128cdc6499297f5c15f06a50f6aa84e30a19
 - name: github.com/tylertreat/hdrhistogram-writer
-  version: d105e3c15daaac745539bdd3e4a1f743b8feda09
+  version: 73b8d31ba571535864ea87c5c3df0361b90a3350
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
 - name: golang.org/x/net

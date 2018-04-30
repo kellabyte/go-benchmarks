@@ -11,6 +11,7 @@ import (
 	"github.com/codahale/hdrhistogram"
 	"github.com/pltr/onering"
 	"github.com/tidwall/fastlane"
+	"github.com/tylertreat/hdrhistogram-writer"
 )
 
 func Benchmark1Producer1ConsumerChannel(b *testing.B) {
@@ -173,5 +174,5 @@ func recordLatencyDistribution(name string, count int, startNanos []int64, endNa
 		histogram.ValueAtQuantile(99.999),
 		histogram.ValueAtQuantile(99.9999))
 
-	//histwriter.WriteDistributionFile(histogram, histwriter.Percentiles{50, 75, 90, 99, 99.9, 99.99, 99.999, 99.9999}, 1.0, name+".histogram")
+	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
 }
