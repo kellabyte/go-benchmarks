@@ -157,6 +157,20 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	recordLatencyDistribution("onering", b.N, startNanos, endNanos)
 }
 
+func BenchmarkNow(b *testing.B) {
+	startNanos := make([]int64, b.N)
+	endNanos := make([]int64, b.N)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		startNanos[i] = time.Now().UnixNano()
+		endNanos[i] = time.Now().UnixNano()
+	}
+
+	b.StopTimer()
+	recordLatencyDistribution("time.Now", b.N, startNanos, endNanos)
+}
+
 func recordLatencyDistribution(name string, count int, startNanos []int64, endNanos []int64) {
 	histogram := hdrhistogram.New(1, 1000000, 5)
 	for i := 0; i < count; i++ {
@@ -164,15 +178,15 @@ func recordLatencyDistribution(name string, count int, startNanos []int64, endNa
 		histogram.RecordValue(diff)
 	}
 
-	fmt.Printf("50: %dns\t75: %dns\t90: %dns\t99: %dns\t99.9: %dns\t99.99: %dns\t99.999: %dns\t99.9999: %dns\n",
-		histogram.ValueAtQuantile(50),
-		histogram.ValueAtQuantile(75),
-		histogram.ValueAtQuantile(90),
-		histogram.ValueAtQuantile(99),
-		histogram.ValueAtQuantile(99.9),
-		histogram.ValueAtQuantile(99.99),
-		histogram.ValueAtQuantile(99.999),
-		histogram.ValueAtQuantile(99.9999))
+	// fmt.Printf("50: %dns\t75: %dns\t90: %dns\t99: %dns\t99.9: %dns\t99.99: %dns\t99.999: %dns\t99.9999: %dns\n",
+	// 	histogram.ValueAtQuantile(50),
+	// 	histogram.ValueAtQuantile(75),
+	// 	histogram.ValueAtQuantile(90),
+	// 	histogram.ValueAtQuantile(99),
+	// 	histogram.ValueAtQuantile(99.9),
+	// 	histogram.ValueAtQuantile(99.99),
+	// 	histogram.ValueAtQuantile(99.999),
+	// 	histogram.ValueAtQuantile(99.9999))
 
 	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
 }
