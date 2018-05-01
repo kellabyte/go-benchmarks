@@ -49,3 +49,4 @@ import:
 - package: github.com/pltr/onering
 - package: github.com/codahale/hdrhistogram
 - package: github.com/tylertreat/hdrhistogram-writer
+- package: github.com/loov/hrtime
