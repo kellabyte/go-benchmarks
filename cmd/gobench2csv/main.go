@@ -11,6 +11,11 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("Please provide an input go bench result file.")
+		fmt.Println("Example: gobench2csv results.log")
+		os.Exit(1)
+	}
 	// Open go bench file.
 	inputFile, err := os.Open(os.Args[1])
 	if err != nil {

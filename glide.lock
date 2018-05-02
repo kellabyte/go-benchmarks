@@ -1,10 +1,12 @@
-hash: 669c699cd2f6b8c4a9458d7303590c0cc1685f057146d10cc8c807665928400b
-updated: 2018-04-27T14:10:22.98721646-04:00
+hash: d3c7a5080c042421dfeca49d885e0de08bf0b5053af891a14847c8cd5fe74714
+updated: 2018-04-30T16:56:57.177863885-04:00
 imports:
 - name: code.cloudfoundry.org/go-diodes
   version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
 - name: github.com/cespare/xxhash
   version: 5c37fe3735342a2e0d01c87a907579987c8936cc
+- name: github.com/codahale/hdrhistogram
+  version: 3a0bb77429bd3a61596f5e8a3172445844342120
 - name: github.com/dchest/siphash
   version: 4ebf1de738443ea7f45f02dc394c4df1942a126d
 - name: github.com/dgryski/go-farm
@@ -24,7 +26,7 @@ imports:
 - name: github.com/dgryski/go-t1ha
   version: d42c050643ba3f1f03c1563aaccd3b3035098560
 - name: github.com/dgryski/trifles
-  version: 1dd4f62b7e4291cc8cbc9fda4ae9381a7bfe1fad
+  version: fb6752171ea11a9a1a76a7627db6290dbd4ceaf0
   subpackages:
   - tsip/go
 - name: github.com/intel-go/cpuid
@@ -37,6 +39,8 @@ imports:
   - buffer
   - jlexer
   - jwriter
+- name: github.com/loov/hrtime
+  version: e5714d984499d6146be24667cbcc40b6855e2409
 - name: github.com/minio/blake2b-simd
   version: 3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4
 - name: github.com/minio/highwayhash
@@ -49,6 +53,8 @@ imports:
   version: 003f63b7f4cff3fc95357005358af2de0f5fe152
 - name: github.com/opennota/fasthash
   version: b619b4c25b8109061ba3c7fec088f9cb289b548c
+- name: github.com/pltr/onering
+  version: d6089249bf5c09f35d7e73dcbfa7ca6762757348
 - name: github.com/rbastic/go-zaphod64
   version: 51824b1f1f4db0bdeb89c6a53ccdac361e1fc738
 - name: github.com/smartystreets/go-disruptor
@@ -60,13 +66,15 @@ imports:
   subpackages:
   - internal
 - name: github.com/tidwall/fastlane
-  version: 9c5d29d7558da1332f0ba157fd721bdbae9724c8
+  version: bd0d2fb0d6cc34bd870e991e2659db8e476435da
 - name: github.com/tidwall/spinlock
   version: 9caf128cdc6499297f5c15f06a50f6aa84e30a19
+- name: github.com/tylertreat/hdrhistogram-writer
+  version: 73b8d31ba571535864ea87c5c3df0361b90a3350
 - name: github.com/Workiva/go-datastructures
   version: 01f52d4880ca171ab1033bb0ee03cda8e0a31cc3
 - name: golang.org/x/net
-  version: 1c05540f6879653db88113bc4a2b70aec4bd491f
+  version: 5f9ae10d9af5b1c89ae6904293b14b064d4ada23
   subpackages:
   - html/charset
 - name: golang.org/x/text
@@ -74,7 +82,7 @@ imports:
   subpackages:
   - encoding
 - name: golang.org/x/tools
-  version: 94b14834a20132093826ea5e2da5502a13908ad3
+  version: 8e070db38e5c55da6a85c81878ab769bf5667848
   subpackages:
   - benchmark/parse
 - name: gopkg.in/yaml.v2
