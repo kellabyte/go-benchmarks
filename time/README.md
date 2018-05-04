@@ -1,5 +1,5 @@
 # Introduction
-This directory includes queue implementation benchmarks for various different time stamp functions.
+This directory includes timestamp benchmarks for various different time stamp functions.
 
 # Guarantees
 Different time functions have different tradeoffs. 
