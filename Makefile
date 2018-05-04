@@ -7,14 +7,20 @@ easyjsonpath = ${PWD}/vendor/github.com/mailru/easyjson
 gobench2csv:
 	@go build -o build/gobench2csv cmd/gobench2csv/main.go
 
-hashing:
-	@cd hashing;go test -benchmem -bench . > hashing.results
+hashing: results
+	@rm -rf ./results/hashing.*
+	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
+	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing.png
 
-json: generate
-	@cd json;go test -benchmem -bench . > json.results
+queues: results
+	@rm -rf ./results/queues.*
+	@go test ./queues -benchmem -bench=. | tee ./results/queues.log
+	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
-queues:
-	@cd queues;go test -benchmem -bench .
+json: generate results
+  @rm -rf ./results/json.*
+	@go test ./json -benchmem -bench=. | tee ./results/json.log
+  @Rscript plotting/gobench_single_nsop.r ./results/json.log ./results/json.png
 
 http:
 	@go build -o build/http/evio http/evio.go
@@ -24,6 +30,9 @@ target:
 
 test:
 	@go test
+
+results:
+	@mkdir results
 
 $(glidepath)/glide:
 	@git clone https://github.com/Masterminds/glide.git $(glidepath)
@@ -38,7 +47,8 @@ easyjson: $(easyjsonpath)/.root/bin/easyjson
 
 libs: $(glidepath)/glide
 	@$(glidepath)/glide install
-	@R CMD BATCH plotting/setup.r
+	@#R CMD BATCH plotting/setup.r
+	@Rscript plotting/setup.r
 
 deps: libs
 
