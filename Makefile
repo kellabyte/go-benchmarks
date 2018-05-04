@@ -7,6 +7,7 @@ gobench2csv:
 	go build -o build/gobench2csv cmd/gobench2csv/main.go
 
 hashing: results
+	@go get -t ./...
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
 	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
