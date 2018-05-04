@@ -19,14 +19,15 @@ queues: results
 	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
 json: generate results
-  @rm -rf ./results/json.*
+	@rm -rf ./results/json.*
 	@go test ./json -benchmem -bench=. | tee ./results/json.log
-  @Rscript plotting/gobench_single_nsop.r ./results/json.log ./results/json.png
+	@Rscript plotting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
 plot: results
 	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
 	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
 	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
+	@Rscript plotting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
 http:
 	@go build -o build/http/evio http/evio.go
@@ -46,7 +47,7 @@ $(glidepath)/glide:
 	@cp $(glidepath)/glide .
 
 $(easyjsonpath)/.root/bin/easyjson:
-	@cd $(easyjsonpath); make build
+	@cd $(easyjsonpath); go build -i -o .root/bin/easyjson ./easyjson
 
 easyjson: $(easyjsonpath)/.root/bin/easyjson
 	@cp $(easyjsonpath)/.root/bin/easyjson .

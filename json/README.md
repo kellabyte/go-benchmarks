@@ -1,13 +1,37 @@
 This directory includes json benchmarks.
 
-# Hardware
+# Setup
 ```
-MacBookPro11,3
-Processor: Intel Core i7 2.8 GHz 4 Cores
-L2 Cache per core: 256 KB
-L3 Cache: 6 MB
-Memory: 16GB
+Ubuntu Linux
+Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz x 20 Cores (40 Hyperthreaded)
+L1 Cache:   320 kB
+L2 Cache:  2560 kB
+L3 Cache: 25600 kB
+Memory: 126 GB
 ```
+
+This benchmark measures encoding and decoding a small JSON document and a larger JSON document. An example of the small document is as follows.
+```
+{
+  "hashtags": [
+    {
+      "indices": [
+        5,
+        10
+      ],
+      "text": "some-text"
+    }
+  ],
+  "urls": [
+    
+  ],
+  "user_mentions": [
+    
+  ]
+}
+```
+
+An example of the large document can be [found here](https://github.com/kellabyte/go-benchmarks/blob/master/json/example.json)
 
 # Results
 ```

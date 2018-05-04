@@ -31,11 +31,6 @@ import:
   - benchmark/parse
 - package: github.com/tidwall/evio
 - package: github.com/tidwall/spinlock
-- package: github.com/mailru/easyjson
-  subpackages:
-  - buffer
-  - jlexer
-  - jwriter
 - package: code.cloudfoundry.org/go-diodes
 - package: github.com/onsi/gomega
   version: ~1.3.0
@@ -55,3 +50,4 @@ import:
 - package: github.com/codahale/hdrhistogram
 - package: github.com/tylertreat/hdrhistogram-writer
 - package: github.com/loov/hrtime
+- package: github.com/mailru/easyjson
