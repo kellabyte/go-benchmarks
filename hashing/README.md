@@ -11,6 +11,8 @@ Memory: 16GB
 
 # Results
 ```
+![results](../results/hashing.png?raw=true)
+
 make hashing
 
 goos: darwin
