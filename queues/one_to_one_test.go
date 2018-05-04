@@ -43,6 +43,7 @@ func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 			startNanos[i] = time.Now().UnixNano()
 			<-q
 			endNanos[i] = time.Now().UnixNano()
+			b.SetBytes(1)
 		}
 		wg.Done()
 	}(b.N)
@@ -77,6 +78,7 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 			startNanos[i] = time.Now().UnixNano()
 			d.Next()
 			endNanos[i] = time.Now().UnixNano()
+			b.SetBytes(1)
 		}
 		wg.Done()
 	}(b.N)
@@ -100,6 +102,7 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 			startNanos[i] = time.Now().UnixNano()
 			ch.Recv()
 			endNanos[i] = time.Now().UnixNano()
+			b.SetBytes(1)
 		}
 		wg.Done()
 	}(b.N)
@@ -150,6 +153,7 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 			//endNanos[i] = time.Now().UnixNano()
 			endNanos[i] = nanotime()
 			i++
+			b.SetBytes(1)
 
 			if i < n {
 				//startNanos[i] = time.Now().UnixNano()
@@ -199,7 +203,7 @@ func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	recordLatencyDistributionBenchmark("onering-hrtime", b.N, bench)
 }
 
-func BenchmarkNow(b *testing.B) {
+func benchmarkNow(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
 
@@ -221,34 +225,12 @@ func recordLatencyDistribution(name string, count int, startNanos []int64, endNa
 		diff := endNanos[i] - startNanos[i]
 		histogram.RecordValue(diff)
 	}
-
-	// fmt.Printf("50: %dns\t75: %dns\t90: %dns\t99: %dns\t99.9: %dns\t99.99: %dns\t99.999: %dns\t99.9999: %dns\n",
-	// 	histogram.ValueAtQuantile(50),
-	// 	histogram.ValueAtQuantile(75),
-	// 	histogram.ValueAtQuantile(90),
-	// 	histogram.ValueAtQuantile(99),
-	// 	histogram.ValueAtQuantile(99.9),
-	// 	histogram.ValueAtQuantile(99.99),
-	// 	histogram.ValueAtQuantile(99.999),
-	// 	histogram.ValueAtQuantile(99.9999))
-
 	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
 }
 
 func recordLatencyDistributionBenchmark(name string, count int, bench *hrtime.BenchmarkTSC) {
-	// histogram := hdrhistogram.New(1, 1000000, 5)
-	// for i := 0; i < count; i++ {
-	// 	diff := endNanos[i] - startNanos[i]
-	// 	histogram.RecordValue(diff)
-	// }
-
-	// histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
-
-	//fmt.Println(bench.Histogram(10))
-
 	histogram := hdrhistogram.New(1, 1000000, 5)
 	for _, lap := range bench.Laps {
-		//histogram.RecordValue(lap.ApproxDuration().Nanoseconds())
 		histogram.RecordValue(int64(lap))
 	}
 	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")

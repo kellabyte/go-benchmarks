@@ -27,6 +27,6 @@ plot = readr::read_delim(args[1], "\t", skip = 5, col_names = FALSE) %>%
   rotate_x_labels(vjust = .5) +
   # labs(title="Title", subtitle="Sub title") +
   xlab("name") +
-  ylab("nanoseconds per operation") +
+  ylab("nanoseconds per operation")
   
 ggsave(args[2], plot, width = 16, height = 9)
