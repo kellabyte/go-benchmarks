@@ -38,11 +38,11 @@ Memory: 126 GB
 ```
 make queues
 
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/kellabyte/go-benchmarks/time
-BenchmarkNanotime-8   	100000000	        18.9 ns/op	  53.00 MB/s	       0 B/op	       0 allocs/op
-BenchmarkHrtime-8     	100000000	        20.6 ns/op	  48.61 MB/s	       0 B/op	       0 allocs/op
+BenchmarkNanotime-40    	20000000	        59.4 ns/op	  16.82 MB/s	       0 B/op	       0 allocs/op
+BenchmarkHrtime-40      	100000000	        21.4 ns/op	  46.76 MB/s	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/kellabyte/go-benchmarks/time	11.624s
+ok  	github.com/kellabyte/go-benchmarks/time	11.010s
 ```
