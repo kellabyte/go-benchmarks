@@ -33,12 +33,20 @@ Memory: 126 GB
 
 # Results
 [![results](../results/queues.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues.png)
+
+p90
 [![results](../results/queues_hdrhistogram_p90.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p90.png)
+p99
 [![results](../results/queues_hdrhistogram_p99.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p99.png)
+p999
 [![results](../results/queues_hdrhistogram_p999.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p999.png)
+p9999
 [![results](../results/queues_hdrhistogram_p9999.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p9999.png)
+p99999
 [![results](../results/queues_hdrhistogram_p99999.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p99999.png)
+p999999
 [![results](../results/queues_hdrhistogram_p99999.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p99999.png)
+p9999999
 [![results](../results/queues_hdrhistogram_p999999.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues_hdrhistogram_p999999.png)
 
 ```
