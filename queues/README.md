@@ -21,27 +21,32 @@ Diodes              Yes                  D1         1+           1+
 Fastlane            Yes                  No         1            1
 ```
 
-# Hardware
+# Setup
 ```
-MacBookPro11,2
-Processor: Intel Core i7 2.2 GHz 4 Cores
-L2 Cache per core: 256 KB
-L3 Cache: 6 MB
-Memory: 16GB
+Ubuntu Linux
+Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz x 20 Cores (40 Hyperthreaded)
+L1 Cache:   320 kB
+L2 Cache:  2560 kB
+L3 Cache: 25600 kB
+Memory: 126 GB
 ```
 
 # Results
+[![results](../results/queues.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues.png)
+
 ```
 make queues
 
-goos: darwin
+goos: linux
 goarch: amd64
 pkg: github.com/kellabyte/go-benchmarks/queues
-Benchmark1Producer1ConsumerChannel-8    20000000        84.8 ns/op       0 B/op	       0 allocs/op
-Benchmark1Producer1ConsumerDiode-8      20000000        87.2 ns/op      15 B/op	       0 allocs/op
-Benchmark1Producer1ConsumerFastlane-8   20000000        66.7 ns/op       0 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerChannel-40     	 5000000	       223 ns/op	   4.48 MB/s	       0 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerDiode-40       	10000000	       211 ns/op	   4.73 MB/s	      15 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerFastlane-40    	10000000	       175 ns/op	   5.69 MB/s	      16 B/op	       1 allocs/op
+Benchmark1Producer1ConsumerOneRing-40     	20000000	       106 ns/op	   9.39 MB/s	       0 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerOneRing2-40    	20000000	        83.8 ns/op	  11.93 MB/s	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/kellabyte/go-benchmarks/queues	5.235s
+ok  	github.com/kellabyte/go-benchmarks/queues	13.473s
 ```
 
 ![latency distribution](https://i.imgur.com/xTz9vEC.png)

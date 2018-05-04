@@ -6,7 +6,7 @@ args = commandArgs(trailingOnly=TRUE) # this line only works when you run this s
 library(tidyverse)
 library(drlib)
 
-plot = readr::read_delim(args[1], "\t", skip = 5, col_names = FALSE) %>%
+plot = readr::read_delim(args[1], "\t", skip = 3, col_names = FALSE) %>%
   set_names("Name", "Ops", "NsPerOp", "MBPerS", "AllocatedBytesPerOp", "AllocationsPerOp") %>%
 
   # Clean up the text so we get numbers
@@ -16,6 +16,9 @@ plot = readr::read_delim(args[1], "\t", skip = 5, col_names = FALSE) %>%
          AllocationsPerOp = as.numeric(str_replace(AllocationsPerOp, " allocs/op", "")),
          Ops = as.numeric(Ops)) %>%
   filter(!is.na(NsPerOp)) %>%
+
+  # Strip out the "Benchmark" prefix from the benchmark name.
+  mutate (Name = str_replace(Name, "Benchmark", "")) %>%
 
   # Split out the cores.
   separate(Name, c("Name", "Cores"), "-") %>%
@@ -27,6 +30,6 @@ plot = readr::read_delim(args[1], "\t", skip = 5, col_names = FALSE) %>%
   rotate_x_labels(vjust = .5) +
   # labs(title="Title", subtitle="Sub title") +
   xlab("name") +
-  ylab("nanoseconds per operation") +
+  ylab("nanoseconds per operation")
   
 ggsave(args[2], plot, width = 16, height = 9)

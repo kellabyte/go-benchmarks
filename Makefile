@@ -10,7 +10,8 @@ gobench2csv:
 hashing: results
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
-	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing.png
+	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
+	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
 
 queues: results
 	@rm -rf ./results/queues.*
@@ -21,6 +22,11 @@ json: generate results
   @rm -rf ./results/json.*
 	@go test ./json -benchmem -bench=. | tee ./results/json.log
   @Rscript plotting/gobench_single_nsop.r ./results/json.log ./results/json.png
+
+plot: results
+	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
+	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
+	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
 http:
 	@go build -o build/http/evio http/evio.go
@@ -46,9 +52,8 @@ easyjson: $(easyjsonpath)/.root/bin/easyjson
 	@cp $(easyjsonpath)/.root/bin/easyjson .
 
 libs: $(glidepath)/glide
-	@$(glidepath)/glide install
-	@#R CMD BATCH plotting/setup.r
-	@Rscript plotting/setup.r
+	$(glidepath)/glide install
+	sudo Rscript plotting/setup.r
 
 deps: libs
 
