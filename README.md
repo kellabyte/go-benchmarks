@@ -11,6 +11,11 @@ brew install r
 sudo apt install curl libcurl4-openssl-dev libxml2-dev r-base
 ```
 
+### Dependencies
+```
+make deps
+```
+
 # Benchmarks
 [Hashing algorithms](https://github.com/kellabyte/go-benchmarks/tree/master/hashing)
 ```
