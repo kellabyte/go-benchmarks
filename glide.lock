@@ -33,6 +33,12 @@ imports:
   version: ec7157e9698925f3ed066c1eeecb7059e0c3422e
 - name: github.com/kavu/go_reuseport
   version: 5f2ed2cad19279ccb56ddbd38220e6c9803dfe65
+- name: github.com/mailru/easyjson
+  version: 8b799c424f57fa123fc63a99d6383bc6e4c02578
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter
 - name: github.com/loov/hrtime
   version: e5714d984499d6146be24667cbcc40b6855e2409
 - name: github.com/minio/blake2b-simd

@@ -21,8 +21,13 @@ make deps
 ```
 make hashing
 ```
+
+[Json](https://github.com/kellabyte/go-benchmarks/tree/master/json)
+```
+make json
+```
+
 [Queue data structures](https://github.com/kellabyte/go-benchmarks/tree/master/queues)
 ```
 make queues
 ```
-
