@@ -8,7 +8,7 @@ brew install r
 
 ### Ubuntu
 ```
-sudo apt install r-base
+sudo apt install curl libcurl4-openssl-dev r-base
 ```
 
 # Benchmarks
