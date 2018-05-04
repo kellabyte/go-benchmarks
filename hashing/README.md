@@ -10,8 +10,8 @@ Memory: 16GB
 ```
 
 # Results
+[![results](../results/hashing.png)](../results/hashing.png)
 ```
-[![results](https://raw.githubusercontent.com/kellabyte/go-benchmarks/master/results/hashing.png)]
 
 make hashing
 
