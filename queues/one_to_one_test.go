@@ -6,7 +6,6 @@ import (
 	"runtime"
 	"sync"
 	"testing"
-	"time"
 	_ "unsafe"
 
 	diodes "code.cloudfoundry.org/go-diodes"
@@ -40,9 +39,9 @@ func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			startNanos[i] = time.Now().UnixNano()
+			startNanos[i] = nanotime()
 			<-q
-			endNanos[i] = time.Now().UnixNano()
+			endNanos[i] = nanotime()
 			b.SetBytes(1)
 		}
 		wg.Done()
@@ -75,9 +74,9 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 	b.ResetTimer()
 	go func(n int) {
 		for i := 0; i < b.N; i++ {
-			startNanos[i] = time.Now().UnixNano()
+			startNanos[i] = nanotime()
 			d.Next()
-			endNanos[i] = time.Now().UnixNano()
+			endNanos[i] = nanotime()
 			b.SetBytes(1)
 		}
 		wg.Done()
@@ -99,9 +98,9 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 
 	go func(n int) {
 		for i := 0; i < n; i++ {
-			startNanos[i] = time.Now().UnixNano()
+			startNanos[i] = nanotime()
 			ch.Recv()
-			endNanos[i] = time.Now().UnixNano()
+			endNanos[i] = nanotime()
 			b.SetBytes(1)
 		}
 		wg.Done()
@@ -200,23 +199,32 @@ func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	wg.Wait()
 
 	b.StopTimer()
-	recordLatencyDistributionBenchmark("onering-hrtime", b.N, bench)
+	recordLatencyDistributionBenchmark("onering-hrtime", bench)
 }
 
-func benchmarkNow(b *testing.B) {
+func BenchmarkNanotimeOverhead(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		//startNanos[i] = time.Now().UnixNano()
-		//endNanos[i] = time.Now().UnixNano()
 		startNanos[i] = nanotime()
 		endNanos[i] = nanotime()
 	}
 
 	b.StopTimer()
-	recordLatencyDistribution("time.Now", b.N, startNanos, endNanos)
+	recordLatencyDistribution("nanotime", b.N, startNanos, endNanos)
+}
+
+func BenchmarkHrtimeOverhead(b *testing.B) {
+	bench := hrtime.NewBenchmarkTSC(b.N)
+
+	b.ResetTimer()
+	for bench.Next() {
+	}
+
+	b.StopTimer()
+	recordLatencyDistributionBenchmark("hrtime", bench)
 }
 
 func recordLatencyDistribution(name string, count int, startNanos []int64, endNanos []int64) {
@@ -225,13 +233,13 @@ func recordLatencyDistribution(name string, count int, startNanos []int64, endNa
 		diff := endNanos[i] - startNanos[i]
 		histogram.RecordValue(diff)
 	}
-	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
+	histwriter.WriteDistributionFile(histogram, nil, 1.0, "../results/"+name+".histogram")
 }
 
-func recordLatencyDistributionBenchmark(name string, count int, bench *hrtime.BenchmarkTSC) {
+func recordLatencyDistributionBenchmark(name string, bench *hrtime.BenchmarkTSC) {
 	histogram := hdrhistogram.New(1, 1000000, 5)
 	for _, lap := range bench.Laps {
 		histogram.RecordValue(int64(lap))
 	}
-	histwriter.WriteDistributionFile(histogram, nil, 1.0, name+".histogram")
+	histwriter.WriteDistributionFile(histogram, nil, 1.0, "../results/"+name+".histogram")
 }
