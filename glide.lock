@@ -1,5 +1,5 @@
-hash: d3c7a5080c042421dfeca49d885e0de08bf0b5053af891a14847c8cd5fe74714
-updated: 2018-04-30T16:56:57.177863885-04:00
+hash: 946ef0c109e269d63c481be7fde1c2ce18d442aeede554fdd8cacc8f0e203f22
+updated: 2018-05-04T15:30:04.516422899-04:00
 imports:
 - name: code.cloudfoundry.org/go-diodes
   version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
@@ -33,14 +33,14 @@ imports:
   version: ec7157e9698925f3ed066c1eeecb7059e0c3422e
 - name: github.com/kavu/go_reuseport
   version: 5f2ed2cad19279ccb56ddbd38220e6c9803dfe65
+- name: github.com/loov/hrtime
+  version: e5714d984499d6146be24667cbcc40b6855e2409
 - name: github.com/mailru/easyjson
   version: 8b799c424f57fa123fc63a99d6383bc6e4c02578
   subpackages:
   - buffer
   - jlexer
   - jwriter
-- name: github.com/loov/hrtime
-  version: e5714d984499d6146be24667cbcc40b6855e2409
 - name: github.com/minio/blake2b-simd
   version: 3f5f724cb5b182a5c278d6d3d55b40e7f8c2efb4
 - name: github.com/minio/highwayhash

@@ -1,12 +1,18 @@
 package json
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/mailru/easyjson"
 )
 
-func BenchmarkEasyjsonUnmarshalLargeData(b *testing.B) {
+func BenchmarkEasyjsonUnmarshal(b *testing.B) {
+	b.Run(strconv.Itoa(len(smallStructText)), func(b *testing.B) { benchmarkEasyjsonUnmarshalSmallData(b) })
+	b.Run(strconv.Itoa(len(largeStructText)), func(b *testing.B) { benchmarkEasyjsonUnmarshalLargeData(b) })
+}
+
+func benchmarkEasyjsonUnmarshalLargeData(b *testing.B) {
 	b.SetBytes(int64(len(largeStructText)))
 
 	for i := 0; i < b.N; i++ {
@@ -18,7 +24,7 @@ func BenchmarkEasyjsonUnmarshalLargeData(b *testing.B) {
 	}
 }
 
-func BenchmarkEasyjsonUnmarshalSmallData(b *testing.B) {
+func benchmarkEasyjsonUnmarshalSmallData(b *testing.B) {
 	b.SetBytes(int64(len(smallStructText)))
 
 	for i := 0; i < b.N; i++ {
@@ -30,7 +36,12 @@ func BenchmarkEasyjsonUnmarshalSmallData(b *testing.B) {
 	}
 }
 
-func BenchmarkEasyjsonMarshalLargeData(b *testing.B) {
+func BenchmarkEasyjsonMarshal(b *testing.B) {
+	b.Run(strconv.Itoa(len(smallStructText)), func(b *testing.B) { benchmarkEasyjsonMarshalSmallData(b) })
+	b.Run(strconv.Itoa(len(largeStructText)), func(b *testing.B) { benchmarkEasyjsonMarshalLargeData(b) })
+}
+
+func benchmarkEasyjsonMarshalLargeData(b *testing.B) {
 	var l int64
 
 	for i := 0; i < b.N; i++ {
@@ -44,7 +55,7 @@ func BenchmarkEasyjsonMarshalLargeData(b *testing.B) {
 	b.SetBytes(l)
 }
 
-func BenchmarkEasyjsonMarshalSmallData(b *testing.B) {
+func benchmarkEasyjsonMarshalSmallData(b *testing.B) {
 	var l int64
 
 	for i := 0; i < b.N; i++ {
