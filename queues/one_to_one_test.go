@@ -238,7 +238,7 @@ func recordLatencyDistribution(name string, count int, startNanos []int64, endNa
 
 func recordLatencyDistributionBenchmark(name string, bench *hrtime.BenchmarkTSC) {
 	histogram := hdrhistogram.New(1, 1000000, 5)
-	for _, lap := range bench.Laps {
+	for _, lap := range bench.Laps() {
 		histogram.RecordValue(int64(lap))
 	}
 	histwriter.WriteDistributionFile(histogram, nil, 1.0, "../results/"+name+".histogram")

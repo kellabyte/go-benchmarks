@@ -1,4 +1,4 @@
-.PHONY: hashing http queues json
+.PHONY: hashing http queues json time
 
 projectpath = ${PWD}
 glidepath = ${PWD}/vendor/github.com/Masterminds/glide
@@ -31,6 +31,17 @@ plot: results
 
 http:
 	@go build -o build/http/evio http/evio.go
+
+time: results
+	@rm -rf ./results/time.*
+	@go test ./time -benchmem -bench=. | tee ./results/time.log
+	@Rscript plotting/gobench_single_nsop.r ./results/time.log ./results/time.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 1 results/time_p90.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 2 results/time_p99.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 3 results/time_p999.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 4 results/time_p9999.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 5 results/time_p99999.png
+	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 6 results/time_p999999.png
 
 target:
 	@go build

@@ -1,5 +1,5 @@
-hash: 946ef0c109e269d63c481be7fde1c2ce18d442aeede554fdd8cacc8f0e203f22
-updated: 2018-05-04T15:30:04.516422899-04:00
+hash: 7a0708091f55f8ca674bf8ec325a54863015cee8eedb4d500436a6376c4c0f02
+updated: 2018-05-04T18:35:55.360299469-04:00
 imports:
 - name: code.cloudfoundry.org/go-diodes
   version: 361f4b34988b402fbf4d5b744cc9b35959c2ac4e
@@ -34,7 +34,7 @@ imports:
 - name: github.com/kavu/go_reuseport
   version: 5f2ed2cad19279ccb56ddbd38220e6c9803dfe65
 - name: github.com/loov/hrtime
-  version: e5714d984499d6146be24667cbcc40b6855e2409
+  version: f50f3e69b115628a5ce4b8946f11a1664e9c92a9
 - name: github.com/mailru/easyjson
   version: 8b799c424f57fa123fc63a99d6383bc6e4c02578
   subpackages:
