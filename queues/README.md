@@ -31,6 +31,8 @@ Memory: 16GB
 ```
 
 # Results
+[![results](../results/queues.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/queues.png)
+
 ```
 make queues
 
