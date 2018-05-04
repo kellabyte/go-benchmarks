@@ -41,6 +41,6 @@ $(glidepath)/glide:
 
 libs: $(glidepath)/glide
 	$(glidepath)/glide install
-	Rscript plotting/setup.r
+	sudo Rscript plotting/setup.r
 
 deps: libs
