@@ -190,7 +190,7 @@ func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	b.ResetTimer()
 	go func(n int64) {
 		runtime.LockOSThread()
-		var v int
+		var v *int
 		for bench.Next() {
 			ring.Get(&v)
 			b.SetBytes(1)
