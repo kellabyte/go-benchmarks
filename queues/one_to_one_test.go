@@ -124,15 +124,18 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
 
-	var ring onering.SPSC
-	ring.Init(8192)
+	var ring = onering.New{Size:8192}.SPSC()
 	var wg sync.WaitGroup
 	wg.Add(2)
-
+	var nums = make([]int64, b.N)
+	for i := range nums {
+		nums[i] = int64(i)
+	}
+	b.ResetTimer()
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			ring.Put(int64(i))
+			ring.Put(&nums[i])
 		}
 		ring.Close()
 		wg.Done()
@@ -141,11 +144,12 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	b.ResetTimer()
 	go func(n int64) {
 		runtime.LockOSThread()
-		var i, v int64
+		var i int64
+		var v *int64
 		//startNanos[i] = time.Now().UnixNano()
 		startNanos[i] = nanotime()
 		for ring.Get(&v) {
-			if v != i {
+			if *v != i {
 				fmt.Printf("Expected %d got %d", i, v)
 				panic(v)
 			}
@@ -171,15 +175,13 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
 
-	var ring onering.SPSC
-	ring.Init(8192)
+	var ring = onering.New{Size:8192}.SPSC()
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			ring.Put(int64(i))
+			ring.Put(&i)
 		}
 		ring.Close()
 		wg.Done()
@@ -188,7 +190,7 @@ func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	b.ResetTimer()
 	go func(n int64) {
 		runtime.LockOSThread()
-		var v int64
+		var v *int
 		for bench.Next() {
 			ring.Get(&v)
 			b.SetBytes(1)
