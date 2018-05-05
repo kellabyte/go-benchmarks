@@ -1,40 +1,55 @@
 .PHONY: hashing http queues json time
 
-projectpath = ${PWD}
-glidepath = ${PWD}/vendor/github.com/Masterminds/glide
-easyjsonpath = ${PWD}/vendor/github.com/mailru/easyjson
+r: plotting/setup.r
+	@Rscript plotting/setup.r
 
-gobench2csv:
-	@go build -o build/gobench2csv cmd/gobench2csv/main.go
+$(GOPATH)/bin/glide:
+	@echo "Install Glide..."
+	@curl https://glide.sh/get | sh
 
-hashing: results
+$(GOPATH)/bin/easyjson: 
+	@echo "Install Easyjson..."
+	@go get -u github.com/mailru/easyjson/...
+
+vendor: $(GOPATH)/bin/glide glide.yaml glide.lock
+	@echo "Install deps..."
+	@glide install
+
+generate: $(GOPATH)/bin/easyjson
+	@echo "Generate go files..."
+	@go generate ./...
+
+results:
+	@echo "Create results folder..."
+	@mkdir results
+
+hashing: vendor results
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
+
+hashing-report: r hashing
 	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
 	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
 
-queues: results
+queues: vendor results
 	@rm -rf ./results/queues.*
 	@go test ./queues -benchmem -bench=. | tee ./results/queues.log
+
+queues-report: r queues
 	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
-json: generate results
+json: vendor generate results
 	@rm -rf ./results/json.*
 	@go test ./json -benchmem -bench=. | tee ./results/json.log
+
+json-report: r json
 	@Rscript plotting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
-plot: results
-	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
-	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
-	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
-	@Rscript plotting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
-
-http:
-	@go build -o build/http/evio http/evio.go
-
-time: results
+time: vendor results
 	@rm -rf ./results/time.*
 	@go test ./time -benchmem -bench=. | tee ./results/time.log
+
+time-report: r time
 	@Rscript plotting/gobench_single_nsop.r ./results/time.log ./results/time.png
 	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 1 results/time_p90.png
 	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 2 results/time_p99.png
@@ -43,31 +58,18 @@ time: results
 	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 5 results/time_p99999.png
 	@Rscript ./plotting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 6 results/time_p999999.png
 
-target:
-	@go build
+benchmark: hashing queues json time
 
-test:
-	@go test
+reports: hashing-report queues-report json-report time-report
 
-results:
-	@mkdir results
+gobench2csv: cmd/gobench2csv/main.go
+	@go build -o build/gobench2csv cmd/gobench2csv/main.go
 
-$(glidepath)/glide:
-	@git clone https://github.com/Masterminds/glide.git $(glidepath)
-	@cd $(glidepath);make build
-	@cp $(glidepath)/glide .
+plot: results
+	@Rscript plotting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
+	@Rscript plotting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
+	@Rscript plotting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
+	@Rscript plotting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
-$(easyjsonpath)/.root/bin/easyjson:
-	@cd $(easyjsonpath); go build -i -o .root/bin/easyjson ./easyjson
-
-easyjson: $(easyjsonpath)/.root/bin/easyjson
-	@cp $(easyjsonpath)/.root/bin/easyjson .
-
-libs: $(glidepath)/glide
-	$(glidepath)/glide install
-	sudo Rscript plotting/setup.r
-
-deps: libs
-
-generate: easyjson
-	@go generate ./...
+http: http/evio.go
+	@go build -o build/http/evio http/evio.go
