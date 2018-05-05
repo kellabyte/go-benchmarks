@@ -26,7 +26,6 @@ func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
@@ -63,7 +62,6 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func() {
 		for i := 0; i < b.N; i++ {
 			d.Set(diodes.GenericDataType(&i))
@@ -95,7 +93,6 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 	var ch fastlane.ChanUint64
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func(n int) {
 		for i := 0; i < n; i++ {
 			startNanos[i] = nanotime()
@@ -131,7 +128,6 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	for i := range nums {
 		nums[i] = int64(i)
 	}
-	b.ResetTimer()
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
