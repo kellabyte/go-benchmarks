@@ -2,13 +2,12 @@
 package queues
 
 import (
-	"fmt"
 	"runtime"
 	"sync"
 	"testing"
 	_ "unsafe"
 
-	diodes "code.cloudfoundry.org/go-diodes"
+	"code.cloudfoundry.org/go-diodes"
 	"github.com/codahale/hdrhistogram"
 	"github.com/loov/hrtime"
 	"github.com/pltr/onering"
@@ -150,10 +149,6 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 		//startNanos[i] = time.Now().UnixNano()
 		startNanos[i] = nanotime()
 		for ring.Get(&v) {
-			if *v != i {
-				fmt.Printf("Expected %d got %d", i, v)
-				panic(v)
-			}
 			//endNanos[i] = time.Now().UnixNano()
 			endNanos[i] = nanotime()
 			i++
