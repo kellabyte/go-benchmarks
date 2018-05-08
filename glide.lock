@@ -54,7 +54,7 @@ imports:
 - name: github.com/opennota/fasthash
   version: b619b4c25b8109061ba3c7fec088f9cb289b548c
 - name: github.com/pltr/onering
-  version: d6089249bf5c09f35d7e73dcbfa7ca6762757348
+  version: 2cfca897df40c101ce9e309824f7ef1b0c56f429
 - name: github.com/rbastic/go-zaphod64
   version: 51824b1f1f4db0bdeb89c6a53ccdac361e1fc738
 - name: github.com/smartystreets/go-disruptor
