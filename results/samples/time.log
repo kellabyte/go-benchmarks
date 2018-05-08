@@ -1,0 +1,7 @@
+goos: linux
+goarch: amd64
+pkg: github.com/kellabyte/go-benchmarks/time
+BenchmarkNanotime-40    	20000000	        55.0 ns/op	  18.20 MB/s	       0 B/op	       0 allocs/op
+BenchmarkHrtime-40      	100000000	        21.3 ns/op	  46.98 MB/s	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/kellabyte/go-benchmarks/time	8.943s
