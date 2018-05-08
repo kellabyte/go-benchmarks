@@ -1,0 +1,9 @@
+goos: linux
+goarch: amd64
+pkg: github.com/kellabyte/go-benchmarks/queues
+Benchmark1Producer1ConsumerChannel-40     	10000000	       182 ns/op	   5.48 MB/s	       0 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerDiode-40       	10000000	       187 ns/op	   5.35 MB/s	      15 B/op	       0 allocs/op
+Benchmark1Producer1ConsumerFastlane-40    	20000000	       117 ns/op	   8.48 MB/s	      16 B/op	       1 allocs/op
+Benchmark1Producer1ConsumerOneRing-40     	20000000	        85.9 ns/op	  11.64 MB/s	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/kellabyte/go-benchmarks/queues	21.334s
