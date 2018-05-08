@@ -16,7 +16,7 @@ hashing: results
 queues: results
 	@rm -rf ./results/queues.*
 	@go test ./queues -benchmem -bench=. -run=none -benchtime=2s | tee ./results/queues.log
-  @Rscript reporting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
+	@Rscript reporting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
 json: generate results
 	@rm -rf ./results/json.*
