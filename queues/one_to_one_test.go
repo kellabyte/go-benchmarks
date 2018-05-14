@@ -2,35 +2,41 @@
 package queues
 
 import (
-	"fmt"
 	"runtime"
 	"sync"
 	"testing"
 	_ "unsafe"
 
-	diodes "code.cloudfoundry.org/go-diodes"
+	"code.cloudfoundry.org/go-diodes"
 	"github.com/codahale/hdrhistogram"
 	"github.com/loov/hrtime"
 	"github.com/pltr/onering"
 	"github.com/tidwall/fastlane"
 	"github.com/tylertreat/hdrhistogram-writer"
+	"unsafe"
 )
 
 func nanotime() int64
-
+func mknumslice(n int) []int64 {
+	var s = make([]int64, n)
+	for i := range s {
+		s[i] = int64(i)
+	}
+	return s
+}
 func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
 
-	q := make(chan int64, 8192)
-
+	q := make(chan *int64, 8192)
+	var numbers = mknumslice(b.N)
 	var wg sync.WaitGroup
 	wg.Add(2)
 
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			q <- int64(i)
+			q <- &numbers[i]
 		}
 		wg.Done()
 	}(b.N)
@@ -60,13 +66,12 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 	d := diodes.NewPoller(diodes.NewOneToOne(b.N, diodes.AlertFunc(func(missed int) {
 		panic("Oops...")
 	})))
-
+	var numbers = mknumslice(b.N)
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func() {
 		for i := 0; i < b.N; i++ {
-			d.Set(diodes.GenericDataType(&i))
+			d.Set(diodes.GenericDataType(&numbers[i]))
 		}
 		wg.Done()
 	}()
@@ -91,11 +96,10 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
-
-	var ch fastlane.ChanUint64
+	var numbers = mknumslice(b.N)
+	var ch fastlane.ChanPointer
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func(n int) {
 		for i := 0; i < n; i++ {
 			startNanos[i] = nanotime()
@@ -109,7 +113,7 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 	b.ResetTimer()
 	go func(n int) {
 		for i := 0; i < n; i++ {
-			ch.Send(uint64(i))
+			ch.Send(unsafe.Pointer(&numbers[i]))
 		}
 		wg.Done()
 	}(b.N)
@@ -123,16 +127,15 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	startNanos := make([]int64, b.N)
 	endNanos := make([]int64, b.N)
-
-	var ring onering.SPSC
-	ring.Init(8192)
+	var numbers = mknumslice(b.N)
+	var ring = onering.New{Size:8192}.SPSC()
 	var wg sync.WaitGroup
 	wg.Add(2)
 
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			ring.Put(int64(i))
+			ring.Put(&numbers[i])
 		}
 		ring.Close()
 		wg.Done()
@@ -141,14 +144,11 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	b.ResetTimer()
 	go func(n int64) {
 		runtime.LockOSThread()
-		var i, v int64
+		var i int64
+		var v *int64
 		//startNanos[i] = time.Now().UnixNano()
 		startNanos[i] = nanotime()
 		for ring.Get(&v) {
-			if v != i {
-				fmt.Printf("Expected %d got %d", i, v)
-				panic(v)
-			}
 			//endNanos[i] = time.Now().UnixNano()
 			endNanos[i] = nanotime()
 			i++
@@ -170,16 +170,14 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 
 func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
-
-	var ring onering.SPSC
-	ring.Init(8192)
+	var numbers = mknumslice(b.N)
+	var ring = onering.New{Size:8192}.SPSC()
 	var wg sync.WaitGroup
 	wg.Add(2)
-
 	go func(n int) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
-			ring.Put(int64(i))
+			ring.Put(&numbers[i])
 		}
 		ring.Close()
 		wg.Done()
@@ -188,7 +186,7 @@ func Benchmark1Producer1ConsumerOneRing2(b *testing.B) {
 	b.ResetTimer()
 	go func(n int64) {
 		runtime.LockOSThread()
-		var v int64
+		var v *int64
 		for bench.Next() {
 			ring.Get(&v)
 			b.SetBytes(1)
