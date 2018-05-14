@@ -5,7 +5,7 @@ This directory contains the R scripts that generate the benchmark reports.
 You can see examples of how the reports are generated in the `Makefile` using R scripts. You can find some sample result files in `results/samples`.
 
 ```
-script plotting/gobench_multi_nsop.r ./results/samples/hashing.log ./results/hashing-multi.png
+Rscript plotting/gobench_multi_nsop.r ./results/samples/hashing.log ./results/hashing-multi.png
 ```
 _Figure 1_. Example command to generate a multi-graph report using R.
 
