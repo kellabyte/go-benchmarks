@@ -1,0 +1,3 @@
+package asm
+
+func Nop()

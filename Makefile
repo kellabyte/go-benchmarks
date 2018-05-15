@@ -23,6 +23,13 @@ results:
 	@echo "Create results folder..."
 	@mkdir results
 
+calls: vendor results
+	@rm -rf ./results/calls.*
+	@go test ./calls -benchmem -bench=. | tee ./results/calls.log
+
+call-report: r call
+	@Rscript reporting/gobench_single_nsop.r ./results/call.log ./results/call.png
+
 hashing: vendor results
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
