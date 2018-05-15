@@ -17,6 +17,11 @@ make deps
 ```
 
 # Benchmarks
+[Function call overhead](https://github.com/kellabyte/go-benchmarks/tree/master/calls)
+```
+make calls
+```
+
 [Hashing algorithms](https://github.com/kellabyte/go-benchmarks/tree/master/hashing)
 ```
 make hashing
