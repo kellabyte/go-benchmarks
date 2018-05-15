@@ -27,14 +27,14 @@ calls: vendor results
 	@rm -rf ./results/calls.*
 	@go test ./calls -benchmem -bench=. | tee ./results/calls.log
 
-calls-report: r calls
+calls-report: calls
 	@Rscript reporting/gobench_single_nsop.r ./results/calls.log ./results/calls.png
 
 hashing: vendor results
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
 
-hashing-report: r hashing
+hashing-report: hashing
 	@Rscript reporting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
 	@Rscript reporting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
 
@@ -42,21 +42,21 @@ queues: vendor results
 	@rm -rf ./results/queues.*
 	@go test ./queues -benchmem -bench=. | tee ./results/queues.log
 
-queues-report: r queues
+queues-report: queues
 	@Rscript reporting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
 
 json: vendor generate results
 	@rm -rf ./results/json.*
 	@go test ./json -benchmem -bench=. | tee ./results/json.log
 
-json-report: r json
+json-report: json
 	@Rscript reporting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
 time: vendor results
 	@rm -rf ./results/time.*
 	@go test ./time -benchmem -bench=. | tee ./results/time.log
 
-time-report: r time
+time-report: time
 	@Rscript ./reporting/gobench_single_nsop.r ./results/time.log ./results/time.png
 	@Rscript ./reporting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 1 results/time_p90.png
 	@Rscript ./reporting/hdr_histogram.r ./results/nanotime.histogram ./results/hrtime.histogram 2 results/time_p99.png
