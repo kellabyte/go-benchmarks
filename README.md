@@ -59,7 +59,7 @@ sudo hdparm -Tt /dev/sda
   Timing buffered disk reads: 2828 MB in  3.00 seconds = 942.53 MB/sec
 ```
 
-### Operating System
+#### Operating System
 ```
 Distributor ID:	Ubuntu
 Description:	Ubuntu 16.04.4 LTS
