@@ -31,3 +31,30 @@ make json
 ```
 make queues
 ```
+# Setup
+#### Hardware
+```
+[2]  Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+[16] 1600 MHz 8GB DDR-3 Single Rank DIMM
+[1]  Raid Controller
+[8]  Intel S3520 SSD 240GB
+[1]  Broadcom 5720 1Gbps Ethernet Adapter
+[2]  Intel Ethernet Server Adapter X520 10GbE Bonded (20GbE)
+```
+
+#### Network Performance
+```
+Interval       Transfer     Bandwidth
+0.0-10.0 sec  21.3 GBytes  18.3 Gbits/sec
+0.0-10.0 sec  21.2 GBytes  18.2 Gbits/sec
+0.0-10.0 sec  21.4 GBytes  18.3 Gbits/sec
+```
+
+#### Disk Performance
+```
+sudo hdparm -Tt /dev/sda
+
+/dev/sda:
+  Timing cached reads:   21800 MB in  1.99 seconds = 10933.80 MB/sec
+  Timing buffered disk reads: 2828 MB in  3.00 seconds = 942.53 MB/sec
+```
