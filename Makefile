@@ -1,7 +1,7 @@
 .PHONY: hashing http queues json time
 
 r: reporting/setup.r
-	@Rscript plotting/setup.r
+	@Rscript reporting/setup.r
 
 $(GOPATH)/bin/glide:
 	@echo "Install Glide..."
