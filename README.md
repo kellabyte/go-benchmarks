@@ -58,3 +58,16 @@ sudo hdparm -Tt /dev/sda
   Timing cached reads:   21800 MB in  1.99 seconds = 10933.80 MB/sec
   Timing buffered disk reads: 2828 MB in  3.00 seconds = 942.53 MB/sec
 ```
+
+### Operating System
+```
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.4 LTS
+Release:	16.04
+Codename:	xenial
+
+Linux version 4.4.0-121-generic 
+(buildd@lcy01-amd64-004) 
+(gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.9) ) 
+#145-Ubuntu SMP Fri Apr 13 13:47:23 UTC 2018
+```
