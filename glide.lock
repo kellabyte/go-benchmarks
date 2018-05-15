@@ -62,7 +62,7 @@ imports:
 - name: github.com/surge/cityhash
   version: cdd6a94144ab18dd21ad865a3aa6837585bffa15
 - name: github.com/tidwall/evio
-  version: 751f59108ad87aaef43e243de036301d233baddb
+  version: cc7a209dcbe6fa42dcc5116377c983fc25f2252a
   subpackages:
   - internal
 - name: github.com/tidwall/fastlane
