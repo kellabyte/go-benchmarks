@@ -28,7 +28,7 @@ calls: vendor results
 	@go test ./calls -benchmem -bench=. | tee ./results/calls.log
 
 calls-report: r calls
-	@Rscript reporting/gobench_single_nsop.r ./results/call.log ./results/call.png
+	@Rscript reporting/gobench_single_nsop.r ./results/calls.log ./results/calls.png
 
 hashing: vendor results
 	@rm -rf ./results/hashing.*
