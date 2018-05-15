@@ -1,6 +1,6 @@
 .PHONY: hashing http queues json time
 
-r: plotting/setup.r
+r: reporting/setup.r
 	@Rscript plotting/setup.r
 
 $(GOPATH)/bin/glide:
