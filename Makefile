@@ -44,6 +44,12 @@ queues: results
 
 queues-report: queues
 	@Rscript reporting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 1 results/queues_p90.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 2 results/queues_p99.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 3 results/queues_p999.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 4 results/queues_p9999.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 5 results/queues_p99999.png
+	@Rscript ./reporting/hdr_histogram.r ./results/channel.histogram ./results/diode.histogram ./results/diode.histogram ./results/onering.histogram 6 results/queues_p999999.png
 
 json: vendor generate results
 	@rm -rf ./results/json.*
