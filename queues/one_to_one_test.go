@@ -61,12 +61,13 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 	var numbers = mknumslice(b.N)
 	var wg sync.WaitGroup
 	wg.Add(2)
-	go func() {
-		for i := 0; i < b.N; i++ {
+
+	go func(n int) {
+		for i := 0; i < n; i++ {
 			d.Set(diodes.GenericDataType(&numbers[i]))
 		}
 		wg.Done()
-	}()
+	}(b.N)
 
 	b.ResetTimer()
 	go func() {
