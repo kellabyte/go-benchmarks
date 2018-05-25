@@ -152,5 +152,5 @@ func recordLatencyDistributionBenchmark(name string, bench *hrtime.BenchmarkTSC)
 	for _, lap := range bench.Laps() {
 		histogram.RecordValue(int64(lap))
 	}
-	histwriter.WriteDistributionFile(histogram, nil, 1.0, "../results/"+name+".histogram")
+	histwriter.WriteDistributionFile(histogram, nil, 1.0, "../../results/"+name+".histogram")
 }
