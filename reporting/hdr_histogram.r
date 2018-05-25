@@ -28,7 +28,8 @@ plot = data_frame(FileName = files) %>%
        y="Latency",
        title="Latency by Percentile Distribution") +
   theme_minimal() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  theme(text = element_text(size=20))
   
 
 ggsave(output, plot, width = 16, height = 4)

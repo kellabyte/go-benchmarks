@@ -63,5 +63,3 @@ Benchmark1Producer1ConsumerOneRing2-40    	20000000	        83.8 ns/op	  11.93 M
 PASS
 ok  	github.com/kellabyte/go-benchmarks/queues	13.473s
 ```
-
-![latency distribution](https://i.imgur.com/xTz9vEC.png)

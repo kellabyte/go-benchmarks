@@ -34,6 +34,8 @@ This benchmark measures encoding and decoding a small JSON document and a larger
 An example of the large document can be [found here](https://github.com/kellabyte/go-benchmarks/blob/master/json/example.json)
 
 # Results
+[![results](../results/json-multi.png)](https://github.com/kellabyte/go-benchmarks/raw/master/results/json-multi.png)
+
 ```
 make json
 
