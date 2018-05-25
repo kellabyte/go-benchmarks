@@ -23,14 +23,14 @@ results:
 	@echo "Create results folder..."
 	@mkdir results
 
-calls: vendor results
+calls: results
 	@rm -rf ./results/calls.*
 	@go test ./calls -benchmem -bench=. | tee ./results/calls.log
 
 calls-report: calls
 	@Rscript reporting/gobench_single_nsop.r ./results/calls.log ./results/calls.png
 
-hashing: vendor results
+hashing: results
 	@rm -rf ./results/hashing.*
 	@go test ./hashing -benchmem -bench=. | tee ./results/hashing.log
 
@@ -38,9 +38,9 @@ hashing-report: hashing
 	@Rscript reporting/gobench_multi_nsop.r ./results/hashing.log ./results/hashing-multi.png
 	@Rscript reporting/gobench_histogram_nsop.r ./results/hashing.log ./results/hashing-histogram.png
 
-queues: vendor results
+queues: results
 	@rm -rf ./results/queues.*
-	@go test ./queues -benchmem -bench=. | tee ./results/queues.log
+	@go test ./queues/one_to_one -benchmem -bench=. | tee ./results/queues.log
 
 queues-report: queues
 	@Rscript reporting/gobench_single_nsop.r ./results/queues.log ./results/queues.png
@@ -52,7 +52,7 @@ json: vendor generate results
 json-report: json
 	@Rscript reporting/gobench_multi_nsop.r ./results/json.log ./results/json-multi.png
 
-time: vendor results
+time: results
 	@rm -rf ./results/time.*
 	@go test ./time -benchmem -bench=. | tee ./results/time.log
 

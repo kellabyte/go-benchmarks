@@ -21,7 +21,8 @@ func mknumslice(n int) []int64 {
 	}
 	return s
 }
-func Benchmark1Producer1ConsumerChannel(b *testing.B) {
+
+func BenchmarkChannel(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
 	q := make(chan *int64, 8192)
 	var numbers = mknumslice(b.N)
@@ -52,7 +53,7 @@ func Benchmark1Producer1ConsumerChannel(b *testing.B) {
 	recordLatencyDistributionBenchmark("channel", bench)
 }
 
-func Benchmark1Producer1ConsumerDiode(b *testing.B) {
+func BenchmarkDiode(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
 
 	d := diodes.NewPoller(diodes.NewOneToOne(b.N, diodes.AlertFunc(func(missed int) {
@@ -84,7 +85,7 @@ func Benchmark1Producer1ConsumerDiode(b *testing.B) {
 	recordLatencyDistributionBenchmark("diode", bench)
 }
 
-func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
+func BenchmarkFastlane(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
 	var numbers = mknumslice(b.N)
 	var ch fastlane.ChanPointer
@@ -113,7 +114,7 @@ func Benchmark1Producer1ConsumerFastlane(b *testing.B) {
 	recordLatencyDistributionBenchmark("fastlane", bench)
 }
 
-func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
+func BenchmarkOneRing(b *testing.B) {
 	bench := hrtime.NewBenchmarkTSC(b.N)
 	var numbers = mknumslice(b.N)
 	var ring = onering.New{Size: 8192}.SPSC()
@@ -143,7 +144,7 @@ func Benchmark1Producer1ConsumerOneRing(b *testing.B) {
 	wg.Wait()
 
 	b.StopTimer()
-	recordLatencyDistributionBenchmark("onering-hrtime", bench)
+	recordLatencyDistributionBenchmark("onering", bench)
 }
 
 func recordLatencyDistributionBenchmark(name string, bench *hrtime.BenchmarkTSC) {

@@ -23,9 +23,10 @@ plot = readr::read_delim(args[1], "\t", skip = 3, col_names = FALSE) %>%
   # Split out the cores.
   separate(Name, c("Name", "Cores"), "-") %>%
   mutate(Cores = as.numeric(Cores)) %>%
-  
+
   # Generate the plots.
   ggplot(aes(Name, NsPerOp)) + 
+  theme(text = element_text(size=24)) +
   geom_col() + 
   rotate_x_labels(vjust = .5) +
   # labs(title="Title", subtitle="Sub title") +
