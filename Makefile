@@ -67,7 +67,7 @@ time-report: time
 
 benchmark: hashing queues json time
 
-reports: hashing-report queues-report json-report time-report
+reports: hashing-report queues-report json-report time-report calls-report
 
 gobench2csv: cmd/gobench2csv/main.go
 	@go build -o build/gobench2csv cmd/gobench2csv/main.go
