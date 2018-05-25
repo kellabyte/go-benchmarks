@@ -33,6 +33,7 @@ plot = readr::read_delim(args[1], "\t", skip = 3, col_names = FALSE) %>%
   geom_col() + 
   rotate_x_labels(vjust = .5) +
   # labs(title="Title", subtitle="Sub title") +
+  theme(text = element_text(size=14)) +
   xlab("name") +
   ylab("nanoseconds per operation") +
   facet_wrap(~ Bytes, scales="free_y")

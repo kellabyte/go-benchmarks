@@ -35,6 +35,9 @@ plot = readr::read_delim(args[1], "\t", skip = 3, col_names = FALSE) %>%
   ylab("nanoseconds per operation") +
   labs(fill='bytes') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        axis.title.x=element_blank())
+        axis.title.x=element_blank()) +
+
+  theme(text = element_text(size=24))
+
 
 ggsave(args[2], plot, width = 16, height = 9)
