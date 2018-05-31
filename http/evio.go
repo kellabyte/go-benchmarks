@@ -1,15 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"runtime"
 
 	"github.com/tidwall/evio"
 )
 
 func main() {
-	// const responseString = "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n"
-	// const responseString = "HTTP/1.1 204\r\n\r\n"
+	logging := false
+	if len(os.Args) > 1 {
+		if os.Args[1] == "--debug" {
+			logging = true
+		}
+	}
+
 	const responseString = "HTTP/1.1 204\r\n\r\n"
 	responseBuffer := []byte(responseString)
 
@@ -29,19 +36,10 @@ func main() {
 		return
 	}
 	events.Data = func(id int, ctx interface{}, in []byte) (out []byte, action evio.Action) {
-		// Calculate how many requests we have. Each request is 40 bytes.
-		// Yes this is a hack but this benchmark is measuring pure IO performance
-		// of evio so don't judge me.
-		// for i := 0; i < len(in); i++ {
-		// 	if in[i] == 'k' {
-
-		// 	}
-		// }
-		// keyLocation := bytes.IndexByte(in, 'k')
-		// fmt.Println(keyLocation)
-
+		if logging {
+			fmt.Printf("%q\n", in)
+		}
 		numberOfRequests := len(in) / 40
-		// fmt.Printf("%q\n", in)
 		out = buffer[:numberOfRequests*len(responseBuffer)]
 		return
 	}
