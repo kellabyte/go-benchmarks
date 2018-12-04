@@ -101,10 +101,12 @@ var sip13hash = func(k []byte) uint64 { return sip13.Sum64(0, 0, k) }
 
 func BenchmarkSip13Hash(b *testing.B) { benchmarkHash(b, "Sip13", sip13hash) }
 
+var fnvh = fnv.New64a()
+
 var fnv64 = func(k []byte) uint64 {
-	h := fnv.New64a()
-	h.Write(k)
-	return h.Sum64()
+	fnvh.Reset()
+	fnvh.Write(k)
+	return fnvh.Sum64()
 }
 
 func BenchmarkFNV1(b *testing.B) { benchmarkHash(b, "fnv1a", fnv64) }
