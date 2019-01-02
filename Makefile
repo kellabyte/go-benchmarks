@@ -23,7 +23,10 @@ results:
 	@echo "Create results folder..."
 	@mkdir results
 
-calls: results
+calls/func.plugin.so: calls/plugin/nop.go
+	@go build -buildmode=plugin -o $@ $<
+
+calls: results calls/func.plugin.so
 	@rm -rf ./results/calls.*
 	@go test ./calls -benchmem -bench=. | tee ./results/calls.log
 
